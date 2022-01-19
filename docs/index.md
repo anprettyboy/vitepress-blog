@@ -1,8 +1,8 @@
-# Google zx
+<!-- # Google zx -->
 <img src="./assets/imgs/programmer-5-years.png" style="width: auto;height:auto;">
 
 ## 简介
-年度流行项目是[zx](https://github.com/google/zx)，一个由谷歌推出的全新的工具，可用于以 JavaScript 或 TypeScript 编写简单的命令行脚本。
+[2021年度最流行项目](https://anprettyboy.github.io/handsome-man/)是[zx](https://github.com/google/zx)，一个由谷歌推出的全新的工具，可用于以 JavaScript 或 TypeScript 编写简单的命令行脚本。
 
 基本上它可以让你在代码中嵌入任何 bash 表达式（ls, cat, git...等任何命令！），并通过[await操作符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/await)使用[JavaScript template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)的结果。
 
@@ -27,11 +27,13 @@
 <img src="./assets/imgs/change.png" style="width: auto;height:auto;">
 
 ### 使用javascript写shell脚本
+#! 是一个约定的标记，它告诉系统这个脚本需要什么解释器来运行，即：使用哪一种 shell。#!被称为[shebang（也称为 Hashbang）](https://zh.wikipedia.org/wiki/Shebang),例如使用 bash：#! /bin/bash
+
 最简单的脚本
-```
+```shell
 #!/usr/bin/env node
 console.log('hello world');
-```shell
+```
 保存为test，执行该脚本 node test,然后可以在控制台获得输出。
 
 更进一步，我们给该脚本一个执行权限，
@@ -197,9 +199,30 @@ spawn('npm', {
 
 <img src="./assets/imgs/avoid-rm.jpeg" style="width: auto;height:auto;">
 
-Bash很好，所以我选择JavaScript
+“Bash很好，所以我选择JavaScript”
 
 前端开发拿手的不就是 Javascript, 嗯 开整
+#### 安装和使用
+```shell
+npm i -g zx
+```
+安装好 zx 之后，将编写的脚本放在 .mjs 后缀的文件中，或者使用 .js 后缀，但是需要使用 void async function () {...}() 对脚本进行包装。
+
+使用时需注意以下几点：
+
+#### 1、脚本需要包含以下文件头：
+```
+#!/usr/bin/env zx
+```
+#### 2. 为脚本添加执行权限再运行
+```
+$ chmod +x ./script.mjs
+$ ./script.mjs
+
+# 或者使用这个命令
+$ zx ./script.mjs
+```
+#### zx 常用命令
 
 
 ### 部分资料参考
