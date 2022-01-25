@@ -1,4 +1,4 @@
-<!-- # Google zx -->
+# Google zx 中文版
 <img src="./assets/imgs/programmer-5-years.png" style="width: auto;height:auto;">
 
 ## 简介
@@ -195,9 +195,8 @@ spawn('npm', {
 
 使用该模块，可以在调用 spawn 函数时，自动根据当前的运行平台，来决定是否生成一个 shell 来执行所给的命令。对命令和参数中的字符进行转义更为方便。
 
-### Google zx
-
 <img src="./assets/imgs/avoid-rm.jpeg" style="width: auto;height:auto;">
+### Google zx
 
 “Bash很好，所以我选择JavaScript”
 
@@ -224,8 +223,80 @@ $ zx ./script.mjs
 ```
 #### zx 常用命令
 
+##### $`command`
+使用 child_process 包中提供的 exec 函数，可以把字符串当做命令执行，并返回一个 Promise(ProcessOutput) 对象。通过的一切${...}都会被自动转义和引用。
+
+```shell
+let count = parseInt(await $`ls -1 | wc -l`)
+console.log(`Files count: ${count}`)
+```
+要并行上传文件，可以使用下面的脚本：
+```shell
+let hosts = [...]
+await Promise.all(hosts.map(host =>
+  $`rsync -azP ./src ${host}:/var/www`
+))
+```
+要修改工作路径，可以使用 cd() 方法：
+```shell
+cd('/tmp')
+// 将输出 /tmp
+await $`pwd`
+```
+fetch() 方法是对 node-fetch 包的包装：
+```shell
+let resp = await fetch('http://wttr.in')
+if (resp.ok) {
+  console.log(await resp.text())
+}
+```
+question() 方法是对 readline 包的包装：
+```shell
+type QuestionOptions = { choices: string[] }
+function question(query: string, options?: QuestionOptions): Promise<string>
+```
+用法：
+```shell
+let username = await question('What is your username? ')
+let token = await question('Choose env variable: ', {
+  choices: Object.keys(process.env)
+})
+```
+对于 chalk 包，不需要导入就可以直接用：
+```shell
+console.log(chalk.blue('Hello world!'))
+```
+fs 包，导入就可以直接用：
+```shell
+let content = await fs.readFile('./package.json')
+```
+Promisified 默认被引入了，等同于以下代码：
+```shell
+import {promises as fs} from 'fs'
+```
+os 包，导入就可以直接用：
+```shell
+await $`cd ${os.homedir()} && mkdir example`
+```
+zx 还可以从其他脚本导入：
+```shell
+#!/usr/bin/env node
+import {$} from 'zx'
+await $`date`
+```
+传递环境变量：
+```shell
+process.env.FOO = 'bar'
+await $`echo $FOO`
+```
+执行远程脚本：
+```shell
+zx https://your-remote-server.com/example-script.mjs
+```
+
 
 ### 部分资料参考
+ - [How to Write Shell Scripts in Node with Google’s zx Library](https://www.sitepoint.com/google-zx-write-node-shell-scripts/)
  - [shelljs前端自动化](https://juejin.cn/post/6987307041321091079)
  - [使用javascript写shell脚本](https://juejin.cn/post/6992743763844005902)
  - [nodejs写bash脚本终极方案！](https://juejin.cn/post/6979989936137043999)
@@ -239,3 +310,17 @@ $ zx ./script.mjs
  - [Write better bash scripts with Zx](https://blog.tericcabrel.com/write-a-better-bash-script-with-zx/)
  - [Create scripts in JavaScript with zx](https://blog.mastykarz.nl/create-scripts-javascript-zx/)
  - [Google ZX source code analysis](https://www.mo4tech.com/google-zx-source-code-analysis.html)
+
+
+
+<!-- 诸位看官，实在抱歉，关于测试框架的排名有误，现纠正如下:
+Playwright  +11.9k
+Storybook  +10.9k
+Cypress  +9.1k
+Puppeteer  +7.6k
+Jest  +3.8k
+Mock Service Worker  +3.5k
+rrweb  +2.7k
+react-testing-library  +2.2k
+Vitest  +1.9k
+jsdom  +1.6k -->

@@ -1,19 +1,26 @@
 module.exports = {
     title: 'front-end cloud',
     description: 'front-end tech',
-    base: '/',
+    base: '/vitepress-blog/',
     // theme: 'reco',
     editLinks: true,
     locales: {
         '/': {
-          lang: 'en-US',
-          title: 'front-end tech',
-          description: 'Vite & Vue powered static site generator.'
-        },
-        '/zh/': {
           lang: 'zh-CN',
           title: '中文 front-end tech',
-          description: '中文 description'
+          description: '中文 description',
+          selectText: '选择语言',
+          // 该语言在下拉菜单中的标签
+          label: '简体中文',
+          ariaLabel: '多语言'
+        },
+        '/en': {
+          lang: 'en-US',
+          title: 'front-end tech',
+          description: 'Vite & Vue powered static site generator.',
+          selectText: 'Languages',
+          label: 'English',
+          ariaLabel: 'Languages'
         }
     },
     themeConfig: {
@@ -22,27 +29,10 @@ module.exports = {
             '/': {
                 editLinkText: 'Edit this page on GitHub',
                 lastUpdated: 'Last Updated',
-                label: 'English',
-                nav: [
-                  { text: 'Guide', link: '/', activeMatch: '^/$|^/guide/' },
-                  // {
-                  //   text: 'Config Reference',
-                  //   link: '/config/basics',
-                  //   activeMatch: '^/config/'
-                  // },
-                  // {
-                  //   text: 'Release Notes',
-                  //   link: 'https://github.com/vuejs/vitepress/releases'
-                  // }
-                ],
-              },
-              '/zh/': {
-                editLinkText: 'Edit this page on GitHub',
-                lastUpdated: 'Last Updated',
                 label: '中文',
 
                 nav: [
-                  { text: 'Guide', link: '/zh/', activeMatch: '^/$|^/guide/' },
+                  { text: 'zx', link: '/zh', activeMatch: '^/$|^/zh/' },
                   // {
                   //   text: 'Release Notes',
                   //   link: 'https://github.com/vuejs/vitepress/releases'
@@ -54,6 +44,23 @@ module.exports = {
                 //   '/config/': getConfigSidebar(),
                 //   '/': getGuideSidebar()
                 // }
+              },
+              '/en': {
+                editLinkText: 'Edit this page on GitHub',
+                lastUpdated: 'Last Updated',
+                label: 'English',
+                nav: [
+                  { text: 'zx', link: '/zx', activeMatch: '^/$|^/zx/' },
+                  // {
+                  //   text: 'Config Reference',
+                  //   link: '/config/basics',
+                  //   activeMatch: '^/config/'
+                  // },
+                  // {
+                  //   text: 'Release Notes',
+                  //   link: 'https://github.com/vuejs/vitepress/releases'
+                  // }
+                ],
               }
         }
         // nav: [
