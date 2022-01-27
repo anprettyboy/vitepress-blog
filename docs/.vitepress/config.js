@@ -1,7 +1,7 @@
 module.exports = {
     title: 'front-end cloud',
     description: 'front-end tech',
-    base: '/vitepress-blog/',
+    base: '/',
     // theme: 'reco',
     editLinks: true,
     locales: {

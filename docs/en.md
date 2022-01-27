@@ -25,15 +25,17 @@ It introduces utilities provided by several popular packages:
 
 
 ### Using javascript to write shell scripts
-#! is a convention tag that tells the system what interpreter the script needs to run, that is, which shell to use. #! Known as shebang ([also known as Hashbang]((https://zh.wikipedia.org/wiki/Shebang))), such as bash：#! /bin/bash.
+#! is a convention tag that tells the system what interpreter the script needs to run, that is, which shell to use. #! Known as shebang ([also known as Hashbang](https://zh.wikipedia.org/wiki/Shebang)), such as bash：#! /bin/bash.
 
 The simplest script
 ```shell
 #!/usr/bin/env node
 console.log('hello world');
+```
 To save the sample code above as test.js, execute the script with node, and get the output from the console.
 
 Further, we give the script an execution permission:
+
 ```shell
 chmod 755 test
 ```
